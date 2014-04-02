@@ -1,0 +1,207 @@
+//Esta es la variable que es resivida por la ventana index
+var args = arguments[0] || {};
+
+
+var IMG_BASE = 'http://alonsocampos.net46.net/';
+
+ //Array to store the data from the todo list 
+       var dataArray = [];        
+       //We execute the function to show the data for the first view         
+       function getTodoList () { 
+       //function to use HTTP to connect to a web server and transfer the data. 
+              var sendit = Ti.Network.createHTTPClient({ 
+                     onerror: function(e){ 
+                           Ti.API.debug(e.error); 
+                           alert('There was an error during the connection'); 
+                     }, 
+                  timeout:1000, 
+              });                      
+              //Here you have to change it for your local ip 
+              //sendit.open('GET', 'http://alonsocampos.net46.net/segundaversion/read.php');  
+              sendit.open('POST', 'http://alonsocampos.net46.net/segundaversion/filtro.php');
+              var params = 
+				{
+					email: args.email
+				}; 
+			  alert(params.email);
+              sendit.send(params); 
+              //Function to be called upon a successful response 
+              sendit.onload = function(){ 
+                     var json = JSON.parse(this.responseText); 
+                     //json.nombre viene de un array de php en el servidor
+                     var json = json.nombre; 
+                     //if the database is empty show an alert 
+                     if(json.length == 0){ 
+                            $.tableView.headerTitle = "The database row is empty"; 
+                     }                      
+                     //Emptying the data to refresh the view 
+                     dataArray = [];
+                                  
+                     //Ingresa la informacio JSON en la table view 
+                     for( var i=0; i<json.length; i++){ 
+                     		var row = Ti.UI.createTableViewRow({    					
+	    					selectedBackgroundColor:'white',
+	    					id:i,
+	    					height:110
+							});
+							
+							
+							var labelUserName = Ti.UI.createLabel({
+						    color:'black',
+						    font:{fontFamily:'Arial', fontSize:16, fontWeight:'bold'},
+						    text:'' + json[i].correo,
+						    left:240, top: 6,
+						    width:360, height: 30
+						  	});
+						  	row.add(labelUserName);
+	                     	
+	                     	
+						
+                     	//Aqui es donde se agrega todo a la tabla   
+                        dataArray.push(row);
+                                      
+                     };
+                                           
+                     $.tableView.setData(dataArray);                            
+               };       
+    };
+       						
+      
+      
+$.mainTabGroup.open();
+
+function changeWithArgs() {
+	dialogs.confirm({
+		title: 'Confirm (args)',
+		message: 'Esta segurp?',
+		buttonNames: ['Si', 'No'],
+		callback: shouldUseExportsAgainByDefault
+	});
+}
+/*
+ * 
+ */
+$.im2.addEventListener('click', function(e) {
+//Creación del boton
+var botonFiltrar = Ti.UI.createButton({
+        backgroundColor:"#FFCC00",
+        borderRadius:10,
+        left:70,
+        top:180,
+        width: 120,
+        height: 25,
+        title: "Filtrar",
+          
+});
+
+//La magia la hace la propiedad opacidad que va de 0 a 1
+var ventanaTransparente = Ti.UI.createWindow({
+    opacity : 0.8,
+    backgroundColor : "black",
+    borderColor:"black",
+    right:10,
+    top:80,
+    width:250,
+    height:250,
+    borderRadius:8
+  
+});
+var basicSwitch = Ti.UI.createSwitch({
+  value:true,
+  left:180,
+  top: 30,
+  width: 20,
+  height: 50 // mandatory property for iOS 
+});
+ventanaTransparente.add(basicSwitch);
+
+basicSwitch.addEventListener('change',function(e){
+  Ti.API.info('Switch value: ' + basicSwitch.value);
+});
+
+
+var basicSwitch = Ti.UI.createSwitch({
+  value:true,
+  left:180,
+  top: 70,
+  width: 20,
+  height: 50 // mandatory property for iOS 
+});
+ventanaTransparente.add(basicSwitch);
+
+basicSwitch.addEventListener('change',function(e){
+  Ti.API.info('Switch value: ' + basicSwitch.value);
+});
+
+
+var basicSwitch = Ti.UI.createSwitch({
+  value:true,
+  left: 180,
+  top: 110,
+  width: "auto",
+  height:"auto"
+   // mandatory property for iOS 
+});
+ventanaTransparente.add(basicSwitch);
+
+basicSwitch.addEventListener('change',function(e){
+  Ti.API.info('Switch value: ' + basicSwitch.value);
+});
+
+//Se agrega el boton a la ventana
+botonFiltrar.addEventListener('click', function(e) {
+    ventanaTransparente.close();
+});
+ventanaTransparente.add(
+    Ti.UI.createLabel({
+        left:15,
+        top: 30,
+        width: "auto",
+        height:  "auto",
+        zIndex:"5",
+        text: "Académica",
+color:"white"
+}));
+
+
+ventanaTransparente.add(
+    Ti.UI.createLabel({
+        left:15,
+        top: 70,
+        width:  "auto",
+        height:  "auto",
+        zIndex:"6",
+        text: "Cultural | Turística",
+        color:"white"
+}));
+
+ventanaTransparente.add(
+    Ti.UI.createLabel({
+        left:15,
+        top: 110,
+        width: "auto",
+        height:  "auto",
+        zIndex:"7",
+        text: "Entretenimiento",
+        color:"white"
+}));
+
+ventanaTransparente.add(botonFiltrar);
+
+ventanaTransparente.open();
+});
+
+
+function closeme(){
+	$.container.close();
+}
+
+function boton1(e){
+	var w= Alloy.createController('win5').getView();
+	w.open();
+	
+}
+function boton2(){
+var m= Alloy.createController('win4').getView();
+m.open();	
+}
