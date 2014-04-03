@@ -1,3 +1,6 @@
+/**
+ * @author Hector Campos Alonso
+ */
 function checkemail(emailAddress)
 {
 	var testresults;
@@ -69,4 +72,8 @@ function NuevaCuenta () {
     }
     
 	
+}
+
+function siguiente () {
+	Alloy.createController('Next').getView().open();
 }

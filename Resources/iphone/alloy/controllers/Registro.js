@@ -1,40 +1,6 @@
 function Controller() {
-    function checkemail(emailAddress) {
-        var testresults;
-        var str = emailAddress;
-        var filter = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-        testresults = filter.test(str) ? true : false;
-        return testresults;
-    }
-    function NuevaCuenta() {
-        var createReq = Titanium.Network.createHTTPClient({
-            onload: function() {
-                if ("Insert failed" == this.responseText || "That username or email already exists" == this.responseText) {
-                    createReq.enabled = true;
-                    createReq.opacity = 1;
-                    alert(this.responseText);
-                } else {
-                    var alertDialog = Titanium.UI.createAlertDialog({
-                        title: "Alert",
-                        message: this.responseText,
-                        buttonNames: [ "OK" ]
-                    });
-                    alertDialog.show();
-                    Alloy.createController("Next").getView().open();
-                }
-            }
-        });
-        if ("" != $.txtEmailw.value && "" != $.txtPasswordw.value && "" != $.txtconfirmew.value && "" != $.txtnombrew.value && "" != $.txtapellidow.value) if ($.txtPasswordw.value != $.txtconfirmew.value) alert("Las contraseñas no coinciden"); else if (checkemail($.txtEmailw.value)) {
-            createReq.open("POST", "http://alonsocampos.net46.net/new.php");
-            var params = {
-                email: $.txtEmailw.value,
-                password: $.txtPasswordw.value,
-                nombre: $.txtnombrew.value,
-                apellido: $.txtapellidow.value
-            };
-            createReq.send(params);
-            alert("Informacion enviada");
-        } else alert("Por favor ingresa un correo valido"); else alert("Complete la informacion necesaria");
+    function siguiente() {
+        Alloy.createController("Next").getView().open();
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "Registro";
@@ -184,17 +150,17 @@ function Controller() {
         id: "label3w"
     });
     $.__views.container.add($.__views.label3w);
-    var __alloyId7 = [];
-    var __alloyId10 = {
+    var __alloyId4 = [];
+    var __alloyId7 = {
         title: "Mujer",
         ns: "Alloy.Abstract"
     };
-    __alloyId7.push(__alloyId10);
-    var __alloyId11 = {
+    __alloyId4.push(__alloyId7);
+    var __alloyId8 = {
         title: "Hombre",
         ns: "Alloy.Abstract"
     };
-    __alloyId7.push(__alloyId11);
+    __alloyId4.push(__alloyId8);
     $.__views.genero = Ti.UI.createButtonBar({
         backgroundColor: "#336699",
         top: 650,
@@ -203,7 +169,7 @@ function Controller() {
         width: 250,
         left: 320,
         value: true,
-        labels: __alloyId7,
+        labels: __alloyId4,
         id: "genero"
     });
     $.__views.container.add($.__views.genero);
@@ -222,7 +188,7 @@ function Controller() {
         id: "btn4w"
     });
     $.__views.container.add($.__views.btn4w);
-    NuevaCuenta ? $.__views.btn4w.addEventListener("click", NuevaCuenta) : __defers["$.__views.btn4w!click!NuevaCuenta"] = true;
+    siguiente ? $.__views.btn4w.addEventListener("click", siguiente) : __defers["$.__views.btn4w!click!siguiente"] = true;
     $.__views.imagew = Ti.UI.createImageView({
         image: "imagen/face.jpg",
         height: Ti.UI.SIZE,
@@ -233,7 +199,7 @@ function Controller() {
     $.__views.container.add($.__views.imagew);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    __defers["$.__views.btn4w!click!NuevaCuenta"] && $.__views.btn4w.addEventListener("click", NuevaCuenta);
+    __defers["$.__views.btn4w!click!siguiente"] && $.__views.btn4w.addEventListener("click", siguiente);
     _.extend($, exports);
 }
 

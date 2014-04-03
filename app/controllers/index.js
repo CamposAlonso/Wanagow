@@ -1,3 +1,6 @@
+/**
+ * @author Hector Campos Alonso
+ */
 function checkemail(emailAddress)
 {
 	var testresults;

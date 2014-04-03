@@ -1,3 +1,7 @@
+/**
+ * @author Hector Campos Alonso
+ */
+
 //Esta es la variable que es resivida por la ventana index
 var args = arguments[0] || {};
 $.txtnombrew.value =args.nombre;

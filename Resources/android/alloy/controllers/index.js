@@ -1,11 +1,126 @@
 function Controller() {
+    function checkemail(emailAddress) {
+        var testresults;
+        var str = emailAddress;
+        var filter = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+        testresults = filter.test(str) ? true : false;
+        return testresults;
+    }
+    function login() {
+        var loginReq = Titanium.Network.createHTTPClient({
+            onload: function() {
+                var json = this.responseText;
+                var response = JSON.parse(json);
+                var json = json.nombre;
+                if (true == response.logged) {
+                    var alertDialog = Ti.UI.createAlertDialog({
+                        title: "Acceso Concedido",
+                        message: 'Bienvenido "' + $.email.value + '"',
+                        buttonNames: [ "OK" ]
+                    });
+                    alertDialog.show();
+                    $.email.blur();
+                    $.password.blur();
+                    var args = {
+                        email: response.email,
+                        password: response.password,
+                        nombre: response.nombre,
+                        apellidos: response.apellidos,
+                        cultural: response.cultural,
+                        ballet: response.ballet,
+                        teatro: response.teatro,
+                        comedia: response.comedia,
+                        drama: response.drama,
+                        infantilC: response.infantilC,
+                        musical: response.musical,
+                        otrosT: response.otrosT,
+                        circo: response.circo,
+                        exposicion: response.exposicion,
+                        fotografia: response.fotografia,
+                        escultura: response.escultura,
+                        pintura: response.pintura,
+                        libros: response.libros,
+                        otrosE: response.otrosE,
+                        cinearte: response.cinearte,
+                        musica: response.musica,
+                        clasica: response.clasica,
+                        instrumental: response.instrumental,
+                        folklorepopular: response.folklorepopular,
+                        turistico: response.turistico,
+                        ferias: response.ferias,
+                        carnavales: response.carnavales,
+                        peregrinaciones: response.peregrinaciones,
+                        fiestasReligiosasIndigenas: response.fiestasReligiosasIndigenas,
+                        otrosTuristica: response.otrosTuristica,
+                        entretenimiento: response.entretenimiento,
+                        conciertos: response.conciertos,
+                        electronica: response.electronica,
+                        jazzblues: response.jazzblues,
+                        trova: response.trova,
+                        rock: response.rock,
+                        alternativa: response.alternativa,
+                        gruperanortena: response.gruperanortena,
+                        infantilE: response.infantilE,
+                        hiphop: response.hiphop,
+                        rancheras: response.rancheras,
+                        pop: response.pop,
+                        metal: response.metal,
+                        reague: response.reague,
+                        reggeatton: response.reggeatton,
+                        baladasboleros: response.baladasboleros,
+                        salsacumbia: response.salsacumbia,
+                        cristiana: response.cristiana,
+                        deportes: response.deportes,
+                        futbol: response.futbol,
+                        basquetball: response.basquetball,
+                        tenis: response.tenis,
+                        beisball: response.beisball,
+                        volleyball: response.volleyball,
+                        torneos: response.torneos,
+                        maratones: response.maratones,
+                        futbolAmericano: response.futbolAmericano,
+                        artesMarciales: response.artesMarciales,
+                        box: response.box,
+                        luchaLibre: response.luchaLibre,
+                        atletismo: response.atletismo,
+                        toros: response.toros,
+                        autosmotos: response.autosmotos,
+                        baresantros: response.baresantros,
+                        inaguracion: response.inaguracion,
+                        promocion: response.promocion,
+                        show: response.show,
+                        fiestasTematicas: response.fiestasTematicas,
+                        bienvenida: response.bienvenida,
+                        academica: response.academica,
+                        areaestudio: response.areaestudio,
+                        congresos: response.congresos,
+                        convenciones: response.convenciones,
+                        seminarios: response.seminarios,
+                        talleres: response.talleres,
+                        diplomados: response.diplomados,
+                        cursos: response.cursos,
+                        conferencias: response.conferencias,
+                        expos: response.expos
+                    };
+                    Alloy.createController("Evento", args).getView().open();
+                } else alert("Datos Invalidos");
+            },
+            onerror: function() {
+                alert("Error de Conexion");
+            }
+        });
+        if ("" != $.email.value && "" != $.password.value) if (checkemail($.email.value)) {
+            loginReq.open("POST", "http://alonsocampos.net46.net/segundaversion/login.php");
+            var params = {
+                email: $.email.value,
+                password: $.password.value
+            };
+            loginReq.send(params);
+        } else alert("Por favor introdusca un correo electronico valido"); else alert("Ingresa un contraseña y/o usuario valido");
+    }
     function btn_2() {
         var w = Alloy.createController("Registro").getView();
         w.open();
-    }
-    function btn_1() {
-        var W = Alloy.createController("Evento").getView();
-        W.open();
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "index";
@@ -82,7 +197,7 @@ function Controller() {
         borderStyle: Titanium.UI.iPhone.SystemButtonStyle.BORDERED
     });
     $.__views.index.add($.__views.btn1);
-    btn_1 ? $.__views.btn1.addEventListener("click", btn_1) : __defers["$.__views.btn1!click!btn_1"] = true;
+    login ? $.__views.btn1.addEventListener("click", login) : __defers["$.__views.btn1!click!login"] = true;
     $.__views.btn2 = Ti.UI.createButton({
         width: 200,
         right: 100,
@@ -115,7 +230,7 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     $.index.open();
-    __defers["$.__views.btn1!click!btn_1"] && $.__views.btn1.addEventListener("click", btn_1);
+    __defers["$.__views.btn1!click!login"] && $.__views.btn1.addEventListener("click", login);
     __defers["$.__views.btn2!click!btn_2"] && $.__views.btn2.addEventListener("click", btn_2);
     _.extend($, exports);
 }

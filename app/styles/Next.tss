@@ -1,5 +1,5 @@
 "#container1":{
-	backgroundColor:"white"
+	backgroundColor:"c5ccd4"
 
 },
 "#imagenW":{
@@ -30,28 +30,6 @@
 	color:"white",
 	
 },
-"#btn2W":{
-	width:300,
-	right:300,
-	left:50,
-	backgroundColor:"#E3C109",
-	height:50,
-	top:800,
-	font: {fontFamily: 'Helvetica Neue'},
-	color:"white"
-},
-"#seccion1":{
-	borderRadius:30,
-	backgroundColor:'white',
-  width: 900, height: 600,
-  
-},
-"#table":{
- borderRadius:10,
-   backgroundColor:'with',
-   width:600,
-   height:400
- },
  "#basicSwitch":{
 	width:100,
 	right:100,

@@ -5,18 +5,14 @@
 		<Label id="label2W" textAlign="Ti.UI.TEXT_ALIGNMENT_CENTER">
 	          YA CASI TERMINAS
 	    Ayudanos a llevarte solo a los eventos que te interesan llenando esta lista.Puedes hacerlo despues desde la configuracion de tu cuenta</Label>
-		<Button id="btn2W">Guardar</Button>
-		<Button onClick="closeme" id="btn1W">Omitir</Button>
+		<Button  id="btn1W">Omitir</Button>
 	    
-    <Switch id="basicSwitch" value="false" bottom="80" title="on"></Switch>
-		<TableView id="table" children="Ti.UI.TableView">
-    <TableViewSection id="seccion1" headerTitle="Academia">
-        <TableViewRow title="* Area de estudios"/>
-        <TableViewRow title="* Congresos" />
-        
-    </TableViewSection>
-</TableView>
-		
+		<TableView id="tableViewAcademica" top="2"borderRadios="10" width="auto" height="442">
+    	</TableView>
+		<TableView id="tableViewCultural" top="500" borderRadios="10" width="auto" height="1041">
+    	</TableView>
+    	<TableView id="tableViewEntretenimiento" top="1650" borderRadios="10" width="auto" height="1601">
+    	</TableView>
 		
 	</Window>
 	

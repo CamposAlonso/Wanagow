@@ -7,8 +7,86 @@ function Controller() {
             },
             timeout: 1e3
         });
-        sendit.open("GET", "http://alonsocampos.net46.net/read_2.php");
-        sendit.send();
+        var preferencias = {
+            email: args.email,
+            cultural: args.cultural,
+            ballet: args.ballet,
+            teatro: args.teatro,
+            comedia: args.comedia,
+            drama: args.drama,
+            infantilC: args.infantilC,
+            musical: args.musical,
+            otrosT: args.otrosT,
+            circo: args.circo,
+            exposicion: args.exposicion,
+            fotografia: args.fotografia,
+            escultura: args.escultura,
+            pintura: args.pintura,
+            libros: args.libros,
+            otrosE: args.otrosE,
+            cinearte: args.cinearte,
+            musica: args.musica,
+            clasica: args.clasica,
+            instrumental: args.instrumental,
+            folklorepopular: args.folklorepopular,
+            turistico: args.turistico,
+            ferias: args.ferias,
+            carnavales: args.carnavales,
+            peregrinaciones: args.peregrinaciones,
+            fiestasReligiosasIndigenas: args.fiestasReligiosasIndigenas,
+            otrosTuristica: args.otrosTuristica,
+            entretenimiento: args.entretenimiento,
+            conciertos: args.conciertos,
+            electronica: args.electronica,
+            jazzblues: args.jazzblues,
+            trova: args.trova,
+            rock: args.rock,
+            alternativa: args.alternativa,
+            gruperanortena: args.gruperanortena,
+            infantilE: args.infantilE,
+            hiphop: args.hiphop,
+            rancheras: args.rancheras,
+            pop: args.pop,
+            metal: args.metal,
+            reague: args.reague,
+            reggeatton: args.reggeatton,
+            baladasboleros: args.baladasboleros,
+            salsacumbia: args.salsacumbia,
+            cristiana: args.cristiana,
+            deportes: args.deportes,
+            futbol: args.futbol,
+            basquetball: args.basquetball,
+            tenis: args.tenis,
+            beisball: args.beisball,
+            volleyball: args.volleyball,
+            torneos: args.torneos,
+            maratones: args.maratones,
+            futbolAmericano: args.futbolAmericano,
+            artesMarciales: args.artesMarciales,
+            box: args.box,
+            luchaLibre: args.luchaLibre,
+            atletismo: args.atletismo,
+            toros: args.toros,
+            autosmotos: args.autosmotos,
+            baresantros: args.baresantros,
+            inaguracion: args.inaguracion,
+            promocion: args.promocion,
+            show: args.show,
+            fiestasTematicas: args.fiestasTematicas,
+            bienvenida: args.bienvenida,
+            academica: args.academica,
+            areaestudio: args.areaestudio,
+            congresos: args.congresos,
+            convenciones: args.convenciones,
+            seminarios: args.seminarios,
+            talleres: args.talleres,
+            diplomados: args.diplomados,
+            cursos: args.cursos,
+            conferencias: args.conferencias,
+            expos: args.expos
+        };
+        sendit.open("GET", "http://alonsocampos.net46.net/segundaversion/preferencias_.php");
+        sendit.send(preferencias);
         sendit.onload = function() {
             var json = JSON.parse(this.responseText);
             var json = json.nombre;
@@ -20,11 +98,11 @@ function Controller() {
                     id: json[i].idEvento,
                     height: 110
                 });
-                row.titulo = json[i].nombre;
+                row.titulo = json[i].titulo;
                 row.imagen = json[i].image;
-                row.detalles = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam arcu quam, accumsan quis leo quis, euismod sodales velit. Suspendisse eget vestibulum nibh. Integer blandit cursus justo in lobortis. Fusce pharetra varius blandit. Maecenas vestibulum vulputate dolor, mattis adipiscing diam suscipit sit amet. Integer ullamcorper massa non tortor ultrices fermentum. Morbi dignissim sem tellus, vel adipiscing elit egestas vitae. Nulla posuere pellentesque volutpat. Mauris convallis in neque in vestibulum. Mauris pharetra metus massa. In id posuere quam. Praesent euismod laoreet arcu, nec imperdiet diam tempus id. Etiam at nunc ut tortor luctus consectetur a sed sem.";
+                row.detalles = json[i].descripcion;
                 row.fecha = json[i].fecha;
-                row.hora = "10:00 am";
+                row.hora = json[i].hora;
                 row.costo = json[i].costo;
                 row.lugar = json[i].lugar;
                 var imageAvatar = Ti.UI.createImageView({
@@ -42,7 +120,7 @@ function Controller() {
                         fontSize: 16,
                         fontWeight: "bold"
                     },
-                    text: "" + json[i].nombre,
+                    text: "" + json[i].titulo,
                     left: 240,
                     top: 6,
                     width: 360,
@@ -78,8 +156,7 @@ function Controller() {
                     });
                     row.add(labelDetails);
                 }
-                switch (json[i].interes) {
-                  case "Academica":
+                if ("Academica" == json[i].tipo || "Area de Estudio" == json[i].tipo) {
                     var view = Titanium.UI.createView({
                         borderRadius: 10,
                         backgroundColor: "yellow",
@@ -88,9 +165,8 @@ function Controller() {
                         right: 0
                     });
                     row.add(view);
-                    break;
-
-                  case "Cultural":
+                }
+                if ("Cultural" == json[i].tipo || "Teatro" == json[i].tipo || "Exposicion" == json[i].tipo || "Musica" == json[i].tipo || "Turistico" == json[i].tipo) {
                     var view = Titanium.UI.createView({
                         borderRadius: 10,
                         backgroundColor: "green",
@@ -99,9 +175,8 @@ function Controller() {
                         right: 0
                     });
                     row.add(view);
-                    break;
-
-                  case "Entretenimiento":
+                }
+                if ("Entretenimiento" == json[i].tipo || "Conciertos" == json[i].tipo || "Deportes" == json[i].tipo || "Bares Antros" == json[i].tipo) {
                     var view = Titanium.UI.createView({
                         borderRadius: 10,
                         backgroundColor: "orange",
@@ -179,6 +254,11 @@ function Controller() {
         id: "im1"
     });
     $.__views.readWin.add($.__views.im1);
+    $.__views.label = Ti.UI.createLabel({
+        text: "I am a red window.",
+        id: "label"
+    });
+    $.__views.readWin.add($.__views.label);
     $.__views.im2 = Ti.UI.createImageView({
         image: "imagen/icos.jpg",
         height: 40,
@@ -287,7 +367,8 @@ function Controller() {
         borderColor: "#F4CE00",
         borderStyle: "Ti.UI.INPUT_BORDERSTYLE_ROUNDED",
         color: "black",
-        id: "txtPasswordw"
+        id: "txtPasswordw",
+        passwordMask: "true"
     });
     $.__views.win4.add($.__views.txtPasswordw);
     $.__views.txtconfirmew = Ti.UI.createTextField({
@@ -300,7 +381,8 @@ function Controller() {
         borderColor: "#F4CE00",
         borderStyle: "Ti.UI.INPUT_BORDERSTYLE_ROUNDED",
         color: "black",
-        id: "txtconfirmew"
+        id: "txtconfirmew",
+        passwordMask: "true"
     });
     $.__views.win4.add($.__views.txtconfirmew);
     $.__views.label2w = Ti.UI.createLabel({
@@ -535,6 +617,12 @@ function Controller() {
     $.__views.mainTabGroup && $.addTopLevelView($.__views.mainTabGroup);
     exports.destroy = function() {};
     _.extend($, $.__views);
+    var args = arguments[0] || {};
+    $.txtnombrew.value = args.nombre;
+    $.txtPasswordw.value = args.password;
+    $.txtconfirmew.value = args.password;
+    $.txtapellidow.value = args.apellidos;
+    $.txtEmailw.value = args.email;
     var IMG_BASE = "http://alonsocampos.net46.net/";
     var dataArray = [];
     $.tableView.addEventListener("click", function(e) {
