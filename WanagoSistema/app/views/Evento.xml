@@ -1,0 +1,60 @@
+<Alloy>
+      <TabGroup backgroundColor="#696969" id="mainTabGroup">
+            <Tab id="tab1" title="Eventos" icon="KS_nav_views.png">
+                <Window id="readWin" onOpen="getTodoList">
+                <View id="cabecera"/>
+                <SearchBar id="buscar" barColor="white" barColor="#000" ></SearchBar>
+                  <ImageView id="im1"></ImageView>
+                  <Label id="label">I am a red window.</Label>
+                  <ImageView id="im2"></ImageView>
+                  <TableView id="tableView"/> 
+                  <Button onClick="getTodoList">Refresh</Button>
+                </Window>
+            </Tab>
+            <!--Ventana 1 -->
+             <Tab id="tab2" title="Calendario" icon="KS_nav_views.png">
+                <Window id="win2" title="">
+                   <Label id="label1" color="#999">I am Window 2</Label>
+                </Window>
+            </Tab>
+            <Tab id="tab3" title="Rutas" icon="KS_nav_views.png">
+                <Window id="win3" title="">
+                   <WebView id="mapa" url="http://www.lenguajesdeprogramacion.esy.es/" />
+                </Window>
+            </Tab>
+            <Tab id="tab4" title="Cuenta" icon="KS_nav_views.png">
+                <Window id="win4" backgroundColor="white">
+                    <View id="cabecera1"/>
+                    <Label id="label1w">DATOS DE LA CUENTA</Label>
+		<TextField id="txtEmailw"></TextField>
+		<TextField id="txtPasswordw" passwordMask="true"></TextField>
+		<TextField id="txtconfirmew" passwordMask="true"></TextField>
+		<Label id="label2w">DATOS DEL USUARIO</Label>
+		<TextField id="txtnombrew"></TextField>
+		<TextField id="txtapellidow"></TextField>
+		<Button id="btn1">Fecha de Nacimiento</Button>
+		<Label id="label3w">Sexo:</Label>
+		<Button id="btn2">Mujer</Button>
+		<Button id="btn3w">Hombre</Button>
+		<Button id="btn5" >Guardar</Button>
+		<Button id="Datos" onClick="boton2" >Datos Personales</Button>
+		<Button id="Prefe" onClick="boton1" >Preferencias</Button>
+                </Window>
+                </Tab>
+            <Tab id="tab3"  icon="KS_nav_views.png">
+                <Window id="win5" >
+               <View id="cabecera1"/>
+          <Switch id="basicSwitch" value="false" bottom="80" title="off" class="TableViewRow"></Switch>
+         <Button id="Datos" >Datos Personales</Button>
+		<Button id="Prefe" >Preferencias</Button>
+		<TableView id="seccion2">
+			<TableViewRow title=" * Academica" id="row" rightImage="imagen/boton2.jpg"></TableViewRow>
+			
+		</TableView>       
+                </Window>
+            </Tab>
+          <!-- Use the Require tag to include external Ti.UI.Tab views -->
+
+        </TabGroup>
+
+</Alloy>

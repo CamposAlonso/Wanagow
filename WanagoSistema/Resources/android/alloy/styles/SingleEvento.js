@@ -1,0 +1,1 @@
+module.exports = [{"isId":true,"priority":100000.0051,"key":"ruta1","style":{backgroundColor:"yellow",top:500,color:"white",}},{"isId":true,"priority":100000.0052,"key":"organizador","style":{backgroundColor:"yellow",left:20,top:500,}},{"isId":true,"priority":100000.0053,"key":"atras","style":{backgroundColor:"yellow",color:"white",}}];
