@@ -1,4 +1,0 @@
-Wanagow
-=======
-
-Titanium Mobile Wanagow

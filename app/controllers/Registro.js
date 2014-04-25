@@ -16,29 +16,37 @@ function checkemail(emailAddress)
     }
     return (testresults);
 };
+var createReq = Titanium.Network.createHTTPClient({
+        onload:function()
+        {
+            if (this.responseText == "Insert failed" || this.responseText == "That username or email already exists")
+            {
+                alert(this.responseText);
+            } 
+            else
+            {
+                /*
+                var alertDialog = Titanium.UI.createAlertDialog({
+                    title: 'Alert',
+                    message: this.responseText,
+                    buttonNames: ['OK']
+                });
+                alertDialog.show();
+                */
+                var params = {
+                    email: $.txtEmailw.value,
+                    password: $.txtPasswordw.value,
+                   	nombre: $.txtnombrew.value,
+                    apellido: $.txtapellidow.value
+                };
+                
+               Alloy.createController('Next',params).getView().open();
+            }
+        }
+    });
+
+
 function NuevaCuenta () {
-	var createReq = Titanium.Network.createHTTPClient({
-		onload:function()
-		{
-		    if (this.responseText == "Insert failed" || this.responseText == "That username or email already exists")
-		    {
-		        createReq.enabled = true;
-		        createReq.opacity = 1;
-		        alert(this.responseText);
-		    } 
-		    else
-		    {
-		        var alertDialog = Titanium.UI.createAlertDialog({
-		            title: 'Alert',
-		            message: this.responseText,
-		            buttonNames: ['OK']
-		        });
-		        alertDialog.show();
-		        Alloy.createController('Next').getView().open();
-		    }
-		}
-	});
-	
 	if ($.txtEmailw.value != '' && $.txtPasswordw.value != '' && $.txtconfirmew.value != '' && $.txtnombrew.value != '' && $.txtapellidow.value != '')
     {
         if ($.txtPasswordw.value != $.txtconfirmew.value)
@@ -55,11 +63,12 @@ function NuevaCuenta () {
             {
             	createReq.open("POST","http://alonsocampos.net46.net/new.php");
                 var params = {
+                	nombre: $.txtnombrew.value,
+                    apellido: $.txtapellidow.value,
                     email: $.txtEmailw.value,
                     password: $.txtPasswordw.value,
                     //password: Ti.Utils.md5HexDigest(password1.value),
-                    nombre: $.txtnombrew.value,
-                    apellido: $.txtapellidow.value
+                    
                 };
                 createReq.send(params);
                 alert("Informacion enviada");

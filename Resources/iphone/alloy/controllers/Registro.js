@@ -1,6 +1,23 @@
 function Controller() {
-    function siguiente() {
-        Alloy.createController("Next").getView().open();
+    function checkemail(emailAddress) {
+        var testresults;
+        var str = emailAddress;
+        var filter = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+        testresults = filter.test(str) ? true : false;
+        return testresults;
+    }
+    function NuevaCuenta() {
+        if ("" != $.txtEmailw.value && "" != $.txtPasswordw.value && "" != $.txtconfirmew.value && "" != $.txtnombrew.value && "" != $.txtapellidow.value) if ($.txtPasswordw.value != $.txtconfirmew.value) alert("Las contraseñas no coinciden"); else if (checkemail($.txtEmailw.value)) {
+            createReq.open("POST", "http://alonsocampos.net46.net/new.php");
+            var params = {
+                nombre: $.txtnombrew.value,
+                apellido: $.txtapellidow.value,
+                email: $.txtEmailw.value,
+                password: $.txtPasswordw.value
+            };
+            createReq.send(params);
+            alert("Informacion enviada");
+        } else alert("Por favor ingresa un correo valido"); else alert("Complete la informacion necesaria");
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "Registro";
@@ -188,7 +205,7 @@ function Controller() {
         id: "btn4w"
     });
     $.__views.container.add($.__views.btn4w);
-    siguiente ? $.__views.btn4w.addEventListener("click", siguiente) : __defers["$.__views.btn4w!click!siguiente"] = true;
+    NuevaCuenta ? $.__views.btn4w.addEventListener("click", NuevaCuenta) : __defers["$.__views.btn4w!click!NuevaCuenta"] = true;
     $.__views.imagew = Ti.UI.createImageView({
         image: "imagen/face.jpg",
         height: Ti.UI.SIZE,
@@ -199,7 +216,20 @@ function Controller() {
     $.__views.container.add($.__views.imagew);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    __defers["$.__views.btn4w!click!siguiente"] && $.__views.btn4w.addEventListener("click", siguiente);
+    var createReq = Titanium.Network.createHTTPClient({
+        onload: function() {
+            if ("Insert failed" == this.responseText || "That username or email already exists" == this.responseText) alert(this.responseText); else {
+                var params = {
+                    email: $.txtEmailw.value,
+                    password: $.txtPasswordw.value,
+                    nombre: $.txtnombrew.value,
+                    apellido: $.txtapellidow.value
+                };
+                Alloy.createController("Next", params).getView().open();
+            }
+        }
+    });
+    __defers["$.__views.btn4w!click!NuevaCuenta"] && $.__views.btn4w.addEventListener("click", NuevaCuenta);
     _.extend($, exports);
 }
 

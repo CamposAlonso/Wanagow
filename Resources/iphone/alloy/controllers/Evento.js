@@ -1,209 +1,341 @@
 function Controller() {
     function getTodoList() {
-        var sendit = Ti.Network.createHTTPClient({
-            onerror: function(e) {
-                Ti.API.debug(e.error);
-                alert("There was an error during the connection");
-            },
-            timeout: 1e3
-        });
-        var preferencias = {
-            email: args.email,
-            cultural: args.cultural,
-            ballet: args.ballet,
-            teatro: args.teatro,
-            comedia: args.comedia,
-            drama: args.drama,
-            infantilC: args.infantilC,
-            musical: args.musical,
-            otrosT: args.otrosT,
-            circo: args.circo,
-            exposicion: args.exposicion,
-            fotografia: args.fotografia,
-            escultura: args.escultura,
-            pintura: args.pintura,
-            libros: args.libros,
-            otrosE: args.otrosE,
-            cinearte: args.cinearte,
-            musica: args.musica,
-            clasica: args.clasica,
-            instrumental: args.instrumental,
-            folklorepopular: args.folklorepopular,
-            turistico: args.turistico,
-            ferias: args.ferias,
-            carnavales: args.carnavales,
-            peregrinaciones: args.peregrinaciones,
-            fiestasReligiosasIndigenas: args.fiestasReligiosasIndigenas,
-            otrosTuristica: args.otrosTuristica,
-            entretenimiento: args.entretenimiento,
-            conciertos: args.conciertos,
-            electronica: args.electronica,
-            jazzblues: args.jazzblues,
-            trova: args.trova,
-            rock: args.rock,
-            alternativa: args.alternativa,
-            gruperanortena: args.gruperanortena,
-            infantilE: args.infantilE,
-            hiphop: args.hiphop,
-            rancheras: args.rancheras,
-            pop: args.pop,
-            metal: args.metal,
-            reague: args.reague,
-            reggeatton: args.reggeatton,
-            baladasboleros: args.baladasboleros,
-            salsacumbia: args.salsacumbia,
-            cristiana: args.cristiana,
-            deportes: args.deportes,
-            futbol: args.futbol,
-            basquetball: args.basquetball,
-            tenis: args.tenis,
-            beisball: args.beisball,
-            volleyball: args.volleyball,
-            torneos: args.torneos,
-            maratones: args.maratones,
-            futbolAmericano: args.futbolAmericano,
-            artesMarciales: args.artesMarciales,
-            box: args.box,
-            luchaLibre: args.luchaLibre,
-            atletismo: args.atletismo,
-            toros: args.toros,
-            autosmotos: args.autosmotos,
-            baresantros: args.baresantros,
-            inaguracion: args.inaguracion,
-            promocion: args.promocion,
-            show: args.show,
-            fiestasTematicas: args.fiestasTematicas,
-            bienvenida: args.bienvenida,
-            academica: args.academica,
-            areaestudio: args.areaestudio,
-            congresos: args.congresos,
-            convenciones: args.convenciones,
-            seminarios: args.seminarios,
-            talleres: args.talleres,
-            diplomados: args.diplomados,
-            cursos: args.cursos,
-            conferencias: args.conferencias,
-            expos: args.expos
-        };
-        sendit.open("GET", "http://alonsocampos.net46.net/segundaversion/preferencias_.php");
-        sendit.send(preferencias);
-        sendit.onload = function() {
-            var json = JSON.parse(this.responseText);
-            var json = json.nombre;
-            0 == json.length && ($.tableView.headerTitle = "The database row is empty");
-            dataArray = [];
-            for (var i = 0; json.length > i; i++) {
-                var row = Ti.UI.createTableViewRow({
-                    selectedBackgroundColor: "white",
-                    id: json[i].idEvento,
-                    height: 110
-                });
-                row.titulo = json[i].titulo;
-                row.imagen = json[i].image;
-                row.detalles = json[i].descripcion;
-                row.fecha = json[i].fecha;
-                row.hora = json[i].hora;
-                row.costo = json[i].costo;
-                row.lugar = json[i].lugar;
-                var imageAvatar = Ti.UI.createImageView({
-                    image: IMG_BASE + json[i].image,
-                    left: 20,
-                    top: 2,
-                    width: 190,
-                    height: 90
-                });
-                row.add(imageAvatar);
-                var labelUserName = Ti.UI.createLabel({
-                    color: "black",
-                    font: {
-                        fontFamily: "Arial",
-                        fontSize: 16,
-                        fontWeight: "bold"
-                    },
-                    text: "" + json[i].titulo,
-                    left: 240,
-                    top: 6,
-                    width: 360,
-                    height: 30
-                });
-                row.add(labelUserName);
-                if (0 != json[i].costo) {
-                    var labelDetails = Ti.UI.createLabel({
-                        color: "#222",
+        if ("" == correo.email) {
+            var sendit = Ti.Network.createHTTPClient({
+                onerror: function(e) {
+                    Ti.API.debug(e.error);
+                    alert("La conexion esta tardando demaciado intente acceder nuevamente");
+                },
+                timeout: 1e3
+            });
+            var preferencias = {
+                email: args.email,
+                cultural: args.cultural,
+                ballet: args.ballet,
+                teatro: args.teatro,
+                comedia: args.comedia,
+                drama: args.drama,
+                infantilC: args.infantilC,
+                musical: args.musical,
+                otrosT: args.otrosT,
+                circo: args.circo,
+                exposicion: args.exposicion,
+                fotografia: args.fotografia,
+                escultura: args.escultura,
+                pintura: args.pintura,
+                libros: args.libros,
+                otrosE: args.otrosE,
+                cinearte: args.cinearte,
+                musica: args.musica,
+                clasica: args.clasica,
+                instrumental: args.instrumental,
+                folklorepopular: args.folklorepopular,
+                turistico: args.turistico,
+                ferias: args.ferias,
+                carnavales: args.carnavales,
+                peregrinaciones: args.peregrinaciones,
+                fiestasReligiosasIndigenas: args.fiestasReligiosasIndigenas,
+                otrosTuristica: args.otrosTuristica,
+                entretenimiento: args.entretenimiento,
+                conciertos: args.conciertos,
+                electronica: args.electronica,
+                jazzblues: args.jazzblues,
+                trova: args.trova,
+                rock: args.rock,
+                alternativa: args.alternativa,
+                gruperanortena: args.gruperanortena,
+                infantilE: args.infantilE,
+                hiphop: args.hiphop,
+                rancheras: args.rancheras,
+                pop: args.pop,
+                metal: args.metal,
+                reague: args.reague,
+                reggeatton: args.reggeatton,
+                baladasboleros: args.baladasboleros,
+                salsacumbia: args.salsacumbia,
+                cristiana: args.cristiana,
+                deportes: args.deportes,
+                futbol: args.futbol,
+                basquetball: args.basquetball,
+                tenis: args.tenis,
+                beisball: args.beisball,
+                volleyball: args.volleyball,
+                torneos: args.torneos,
+                maratones: args.maratones,
+                futbolAmericano: args.futbolAmericano,
+                artesMarciales: args.artesMarciales,
+                box: args.box,
+                luchaLibre: args.luchaLibre,
+                atletismo: args.atletismo,
+                toros: args.toros,
+                autosmotos: args.autosmotos,
+                baresantros: args.baresantros,
+                inaguracion: args.inaguracion,
+                promocion: args.promocion,
+                show: args.show,
+                fiestasTematicas: args.fiestasTematicas,
+                bienvenida: args.bienvenida,
+                academica: args.academica,
+                areaestudio: args.areaestudio,
+                congresos: args.congresos,
+                convenciones: args.convenciones,
+                seminarios: args.seminarios,
+                talleres: args.talleres,
+                diplomados: args.diplomados,
+                cursos: args.cursos,
+                conferencias: args.conferencias,
+                expos: args.expos
+            };
+            sendit.open("GET", "http://alonsocampos.net46.net/segundaversion/preferencias_.php");
+            sendit.send(preferencias);
+            sendit.onload = function() {
+                var json = JSON.parse(this.responseText);
+                var json = json.nombre;
+                0 == json.length && ($.tableView.headerTitle = "No hay eventos disponibles");
+                dataArray = [];
+                for (var i = 0; json.length > i; i++) {
+                    var row = Ti.UI.createTableViewRow({
+                        selectedBackgroundColor: "white",
+                        id: json[i].idEvento,
+                        height: 110
+                    });
+                    row.titulo = json[i].titulo;
+                    row.imagen = json[i].image;
+                    row.detalles = json[i].descripcion;
+                    row.fecha = json[i].fecha;
+                    row.hora = json[i].hora;
+                    row.costo = json[i].costo;
+                    row.lugar = json[i].lugar;
+                    var imageAvatar = Ti.UI.createImageView({
+                        image: IMG_BASE + json[i].image,
+                        left: 20,
+                        top: 2,
+                        width: 190,
+                        height: 90
+                    });
+                    row.add(imageAvatar);
+                    var labelUserName = Ti.UI.createLabel({
+                        color: "black",
                         font: {
                             fontFamily: "Arial",
-                            fontSize: 14,
-                            fontWeight: "normal"
+                            fontSize: 16,
+                            fontWeight: "bold"
                         },
-                        text: "" + json[i].fecha + "               " + json[i].costo,
+                        text: "" + json[i].titulo,
                         left: 240,
-                        top: 44,
-                        width: "100%"
+                        top: 6,
+                        width: 360,
+                        height: 30
                     });
-                    row.add(labelDetails);
-                } else {
-                    var labelDetails = Ti.UI.createLabel({
-                        color: "#222",
+                    row.add(labelUserName);
+                    if (0 != json[i].costo) {
+                        var labelDetails = Ti.UI.createLabel({
+                            color: "#222",
+                            font: {
+                                fontFamily: "Arial",
+                                fontSize: 14,
+                                fontWeight: "normal"
+                            },
+                            text: "" + json[i].fecha + "               " + json[i].costo,
+                            left: 240,
+                            top: 44,
+                            width: "100%"
+                        });
+                        row.add(labelDetails);
+                    } else {
+                        var labelDetails = Ti.UI.createLabel({
+                            color: "#222",
+                            font: {
+                                fontFamily: "Arial",
+                                fontSize: 14,
+                                fontWeight: "normal"
+                            },
+                            text: "" + json[i].fecha + "               " + "Gratuito",
+                            left: 240,
+                            top: 44,
+                            width: "100%"
+                        });
+                        row.add(labelDetails);
+                    }
+                    if ("Academica" == json[i].tipo || "Area de Estudio" == json[i].tipo) {
+                        var view = Titanium.UI.createView({
+                            borderRadius: 10,
+                            backgroundColor: "yellow",
+                            width: 10,
+                            height: 150,
+                            right: 0
+                        });
+                        row.add(view);
+                    }
+                    if ("Cultural" == json[i].tipo || "Teatro" == json[i].tipo || "Exposicion" == json[i].tipo || "Musica" == json[i].tipo || "Turistico" == json[i].tipo) {
+                        var view = Titanium.UI.createView({
+                            borderRadius: 10,
+                            backgroundColor: "green",
+                            width: 10,
+                            height: 150,
+                            right: 0
+                        });
+                        row.add(view);
+                    }
+                    if ("Entretenimiento" == json[i].tipo || "Conciertos" == json[i].tipo || "Deportes" == json[i].tipo || "Bares Antros" == json[i].tipo) {
+                        var view = Titanium.UI.createView({
+                            borderRadius: 10,
+                            backgroundColor: "orange",
+                            width: 10,
+                            height: 150,
+                            right: 0
+                        });
+                        row.add(view);
+                    }
+                    var labelDate = Ti.UI.createLabel({
+                        color: "#999",
                         font: {
                             fontFamily: "Arial",
-                            fontSize: 14,
+                            fontSize: 12,
                             fontWeight: "normal"
                         },
-                        text: "" + json[i].fecha + "               " + "Gratuito",
+                        text: "" + json[i].lugar,
                         left: 240,
-                        top: 44,
-                        width: "100%"
+                        bottom: 10,
+                        width: "100%",
+                        height: 20
                     });
-                    row.add(labelDetails);
+                    row.add(labelDate);
+                    dataArray.push(row);
                 }
-                if ("Academica" == json[i].tipo || "Area de Estudio" == json[i].tipo) {
-                    var view = Titanium.UI.createView({
-                        borderRadius: 10,
-                        backgroundColor: "yellow",
-                        width: 10,
-                        height: 150,
-                        right: 0
+                $.tableView.setData(dataArray);
+            };
+        } else {
+            var sendit = Ti.Network.createHTTPClient({
+                onerror: function(e) {
+                    Ti.API.debug(e.error);
+                    alert("La conexion esta tardando demaciado intente acceder nuevamente");
+                },
+                timeout: 1e3
+            });
+            var preferencias = {
+                email: correo.email
+            };
+            sendit.open("POST", "http://alonsocampos.net46.net/segundaversion/cargareventos.php");
+            sendit.send(preferencias);
+            sendit.onload = function() {
+                var json = JSON.parse(this.responseText);
+                var json = json.nombre;
+                0 == json.length && ($.tableView.headerTitle = "No hay eventos disponibles");
+                dataArray = [];
+                for (var i = 0; json.length > i; i++) {
+                    var row = Ti.UI.createTableViewRow({
+                        selectedBackgroundColor: "white",
+                        id: json[i].idEvento,
+                        height: 110
                     });
-                    row.add(view);
-                }
-                if ("Cultural" == json[i].tipo || "Teatro" == json[i].tipo || "Exposicion" == json[i].tipo || "Musica" == json[i].tipo || "Turistico" == json[i].tipo) {
-                    var view = Titanium.UI.createView({
-                        borderRadius: 10,
-                        backgroundColor: "green",
-                        width: 10,
-                        height: 150,
-                        right: 0
+                    row.titulo = json[i].titulo;
+                    row.imagen = json[i].image;
+                    row.detalles = json[i].descripcion;
+                    row.fecha = json[i].fecha;
+                    row.hora = json[i].hora;
+                    row.costo = json[i].costo;
+                    row.lugar = json[i].lugar;
+                    var imageAvatar = Ti.UI.createImageView({
+                        image: IMG_BASE + json[i].image,
+                        left: 20,
+                        top: 2,
+                        width: 190,
+                        height: 90
                     });
-                    row.add(view);
-                }
-                if ("Entretenimiento" == json[i].tipo || "Conciertos" == json[i].tipo || "Deportes" == json[i].tipo || "Bares Antros" == json[i].tipo) {
-                    var view = Titanium.UI.createView({
-                        borderRadius: 10,
-                        backgroundColor: "orange",
-                        width: 10,
-                        height: 150,
-                        right: 0
+                    row.add(imageAvatar);
+                    var labelUserName = Ti.UI.createLabel({
+                        color: "black",
+                        font: {
+                            fontFamily: "Arial",
+                            fontSize: 16,
+                            fontWeight: "bold"
+                        },
+                        text: "" + json[i].titulo,
+                        left: 240,
+                        top: 6,
+                        width: 360,
+                        height: 30
                     });
-                    row.add(view);
+                    row.add(labelUserName);
+                    if (0 != json[i].costo) {
+                        var labelDetails = Ti.UI.createLabel({
+                            color: "#222",
+                            font: {
+                                fontFamily: "Arial",
+                                fontSize: 14,
+                                fontWeight: "normal"
+                            },
+                            text: "" + json[i].fecha + "               " + json[i].costo,
+                            left: 240,
+                            top: 44,
+                            width: "100%"
+                        });
+                        row.add(labelDetails);
+                    } else {
+                        var labelDetails = Ti.UI.createLabel({
+                            color: "#222",
+                            font: {
+                                fontFamily: "Arial",
+                                fontSize: 14,
+                                fontWeight: "normal"
+                            },
+                            text: "" + json[i].fecha + "               " + "Gratuito",
+                            left: 240,
+                            top: 44,
+                            width: "100%"
+                        });
+                        row.add(labelDetails);
+                    }
+                    if ("Academica" == json[i].tipo || "Area de Estudio" == json[i].tipo) {
+                        var view = Titanium.UI.createView({
+                            borderRadius: 10,
+                            backgroundColor: "yellow",
+                            width: 10,
+                            height: 150,
+                            right: 0
+                        });
+                        row.add(view);
+                    }
+                    if ("Cultural" == json[i].tipo || "Teatro" == json[i].tipo || "Exposicion" == json[i].tipo || "Musica" == json[i].tipo || "Turistico" == json[i].tipo) {
+                        var view = Titanium.UI.createView({
+                            borderRadius: 10,
+                            backgroundColor: "green",
+                            width: 10,
+                            height: 150,
+                            right: 0
+                        });
+                        row.add(view);
+                    }
+                    if ("Entretenimiento" == json[i].tipo || "Conciertos" == json[i].tipo || "Deportes" == json[i].tipo || "Bares Antros" == json[i].tipo) {
+                        var view = Titanium.UI.createView({
+                            borderRadius: 10,
+                            backgroundColor: "orange",
+                            width: 10,
+                            height: 150,
+                            right: 0
+                        });
+                        row.add(view);
+                    }
+                    var labelDate = Ti.UI.createLabel({
+                        color: "#999",
+                        font: {
+                            fontFamily: "Arial",
+                            fontSize: 12,
+                            fontWeight: "normal"
+                        },
+                        text: "" + json[i].lugar,
+                        left: 240,
+                        bottom: 10,
+                        width: "100%",
+                        height: 20
+                    });
+                    row.add(labelDate);
+                    dataArray.push(row);
                 }
-                var labelDate = Ti.UI.createLabel({
-                    color: "#999",
-                    font: {
-                        fontFamily: "Arial",
-                        fontSize: 12,
-                        fontWeight: "normal"
-                    },
-                    text: "" + json[i].lugar,
-                    left: 240,
-                    bottom: 10,
-                    width: "100%",
-                    height: 20
-                });
-                row.add(labelDate);
-                dataArray.push(row);
-            }
-            $.tableView.setData(dataArray);
-        };
+                $.tableView.setData(dataArray);
+            };
+        }
     }
     function boton1() {
         var w = Alloy.createController("win5").getView();
@@ -311,7 +443,7 @@ function Controller() {
     });
     $.__views.mapa = Ti.UI.createWebView({
         id: "mapa",
-        url: "https://maps.google.com.mx/"
+        url: "http://www.lenguajesdeprogramacion.esy.es/"
     });
     $.__views.win3.add($.__views.mapa);
     $.__views.tab3 = Ti.UI.createTab({
@@ -618,11 +750,20 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
-    $.txtnombrew.value = args.nombre;
-    $.txtPasswordw.value = args.password;
-    $.txtconfirmew.value = args.password;
-    $.txtapellidow.value = args.apellidos;
-    $.txtEmailw.value = args.email;
+    var correo = arguments[0] || {};
+    if ("" == correo) {
+        $.txtnombrew.value = args.nombre;
+        $.txtPasswordw.value = args.password;
+        $.txtconfirmew.value = args.password;
+        $.txtapellidow.value = args.apellidos;
+        $.txtEmailw.value = args.email;
+    } else {
+        $.txtnombrew.value = correo.nombre;
+        $.txtPasswordw.value = correo.password;
+        $.txtconfirmew.value = correo.password;
+        $.txtapellidow.value = correo.apellidos;
+        $.txtEmailw.value = correo.email;
+    }
     var IMG_BASE = "http://alonsocampos.net46.net/";
     var dataArray = [];
     $.tableView.addEventListener("click", function(e) {

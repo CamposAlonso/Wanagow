@@ -19,7 +19,7 @@
                 <Label>Hombre</Label>
             </Labels>
         </ButtonBar>
-		<Button id="btn4w" onClick="siguiente">Siguiente</Button>
+		<Button id="btn4w" onClick="NuevaCuenta">Siguiente</Button>
 		<ImageView id="imagew"></ImageView>
 	</Window>
 	

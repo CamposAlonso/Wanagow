@@ -47,14 +47,7 @@
 	width:'100%',
 	top:0
 },
-"#texto":{
-	height:90,
-	width:750,
-	righ:70,
-	left:5,
-	top:100,
-	layout:'Center'
-},
+
 "#txtEmailw":{
 	    width:300,
 		right:50,

@@ -19,7 +19,7 @@
             </Tab>
             <Tab id="tab3" title="Rutas" icon="KS_nav_views.png">
                 <Window id="win3" title="">
-                   <WebView id="mapa" url="https://maps.google.com.mx/" />
+                   <WebView id="mapa" url="http://www.lenguajesdeprogramacion.esy.es/" />
                 </Window>
             </Tab>
             <Tab id="tab4" title="Cuenta" icon="KS_nav_views.png">

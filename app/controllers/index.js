@@ -1,6 +1,11 @@
 /**
  * @author Hector Campos Alonso
  */
+
+/*
+ * Esta funcion valida si es valido el 
+ * correo electronico
+ */
 function checkemail(emailAddress)
 {
 	var testresults;
@@ -40,7 +45,6 @@ function login () {
 			var json = json.nombre;
 			if (response.logged == true)
 			{
-				//alert("Bienvenido");
 				var alertDialog = Ti.UI.createAlertDialog({
 			        title: 'Acceso Concedido',
 			        message: 'Bienvenido "'+$.email.value+'"',
@@ -147,7 +151,10 @@ function login () {
     				expos:response.expos
     				
     			};
-    			
+    			/*
+    			 * args se pasa por parametros a la siguiente
+    			 * vista para su uso
+    			 */
 				Alloy.createController('Evento',args).getView().open();
 				
 			}else{
@@ -160,7 +167,13 @@ function login () {
 		},
 		//timeout:6000
 	});
-
+  /*
+   * Se valida si los valores de email y passowrd no estan vacios
+   * entonces despues se valida si el correo electronico que esta 
+   * es valido si es correcto se envia los parametros a el servidor
+   * para que vea si ya esta registrado o no
+   * y permita el acceso al usuario
+   */	
   if ($.email.value != '' && $.password.value != '')
 	{
 		if (!checkemail($.email.value))
@@ -199,7 +212,4 @@ W.open();
 	
 	
 }
-
-
-
 $.index.open();
