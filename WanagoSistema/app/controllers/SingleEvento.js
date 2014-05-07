@@ -1,3 +1,0 @@
-/**
- * @author Hector Campos Alonso
- */

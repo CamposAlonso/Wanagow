@@ -496,7 +496,7 @@ var sendit = Ti.Network.createHTTPClient({
 							   {
 							      var alertDialog = Titanium.UI.createAlertDialog({
 							          title: 'Alert',
-							          message: this.responseText,
+							          message: "Registro Terminado",
 							          buttonNames: ['OK']
 							       });
 							       alertDialog.show();
@@ -504,9 +504,12 @@ var sendit = Ti.Network.createHTTPClient({
 								       email: sesion.email,
 								       password: sesion.password,
 				                   	   nombre: sesion.nombre,
-				                       apellidos: sesion.apellido
+				                       apellidos: sesion.apellido,
+				                       academica: $.tableViewAcademica.data[0].rows[0].children[0].value,
+				                       cultural: $.tableViewCultural.data[0].rows[0].children[0].value,
+				                       entretenimiento:$.tableViewEntretenimiento.data[0].rows[0].children[0].value,
 								   };
-									alert(correo);
+									//alert(correo);
 							       Alloy.createController('Evento',correo).getView().open();	
 							    }
 						  }; 
@@ -545,14 +548,21 @@ var enviar = Ti.Network.createHTTPClient({
   	
     var alertDialog = Titanium.UI.createAlertDialog({
         title: 'Alert',
-        message: this.responseText,
+        message: "Registro Terminado",
         buttonNames: ['OK']
     });
     alertDialog.show();
     var correo = {
        email: sesion.email,
+       password: sesion.password,
+   	   nombre: sesion.nombre,
+       apellidos: sesion.apellido,
+       academica: $.tableViewAcademica.data[0].rows[0].children[0].value,
+       cultural: $.tableViewCultural.data[0].rows[0].children[0].value,
+       entretenimiento:$.tableViewEntretenimiento.data[0].rows[0].children[0].value,
+       
 	};
-	alert(correo);
+	//alert(correo);
 	Alloy.createController('Evento',correo).getView().open();	
   }; 
 }

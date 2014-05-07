@@ -120,29 +120,7 @@
 	font: {fontFamily: 'Helvetica Neue'},
 	color:"white"
 },
-"#btn3w":{
-	width:100,
-	right:100,
-	left:436,
-	backgroundColor:"#C5B76A",
-	height:50,
-	top:650,
-	font: {fontFamily: 'Helvetica Neue'},
-	color:"white"
-},
-"#btn5":{
-	width:300,
-	right:300,
-	left:250,
-	layout:"center",
-	backgroundColor:"#515050",
-	height:50,
-	top:750,
-	font: {fontFamily: 'Helvetica Neue'},
-	color:"white",
-	borderStyle:"Ti.UI.INPUT_BORDERSTYLE_ROUNDED"
-       	
-},
+      
 "#btn2":{
 	width:100,
 	right:100,
@@ -152,30 +130,6 @@
 	top:650,
 	font: {fontFamily: 'Helvetica Neue'},
 	color:"white"
-},
-"#Datos":{
-	width:200,
-	right:250,
-	left:150,
-	backgroundColor:"#DCBC0D",
-	height:50,
-	top:10,
-	font: {fontFamily: 'Helvetica Neue'},
-	color:"white",
-	borderStyle:"Ti.UI.INPUT_BORDERSTYLE_ROUNDED",
-	borderColor:"black"
-},
-"#Prefe":{
-	width:200,
-	right:250,
-	left:450,
-	backgroundColor:"#DCBC0D",
-	height:50,
-	top:10,
-	font: {fontFamily: 'Helvetica Neue'},
-	color:"white",
-	borderStyle:"Ti.UI.INPUT_BORDERSTYLE_ROUNDED",
-	borderColor:"black"
 },
 "#label1w":{
 	height:Ti.UI.SIZE,
@@ -198,18 +152,6 @@
 	height:50,
 	top:650
 
-},
-"#cabecera1":{
-	backgroundColor:'#F4CE00',
-	height:75,
-	width:'100%',
-	top:0
-},
-"#seccion2":{
-	borderRadius:40,
-	backgroundColor:'white',
-  width: 700, height: 700,
- }
- 
+}
 
 	

@@ -167,17 +167,17 @@ function Controller() {
         id: "label3w"
     });
     $.__views.container.add($.__views.label3w);
-    var __alloyId4 = [];
-    var __alloyId7 = {
+    var __alloyId3 = [];
+    var __alloyId6 = {
         title: "Mujer",
         ns: "Alloy.Abstract"
     };
-    __alloyId4.push(__alloyId7);
-    var __alloyId8 = {
+    __alloyId3.push(__alloyId6);
+    var __alloyId7 = {
         title: "Hombre",
         ns: "Alloy.Abstract"
     };
-    __alloyId4.push(__alloyId8);
+    __alloyId3.push(__alloyId7);
     $.__views.genero = Ti.UI.createButtonBar({
         backgroundColor: "#336699",
         top: 650,
@@ -186,7 +186,7 @@ function Controller() {
         width: 250,
         left: 320,
         value: true,
-        labels: __alloyId4,
+        labels: __alloyId3,
         id: "genero"
     });
     $.__views.container.add($.__views.genero);

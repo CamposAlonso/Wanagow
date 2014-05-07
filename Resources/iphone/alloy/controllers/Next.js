@@ -15,14 +15,19 @@ function Controller() {
         enviar.onload = function() {
             var alertDialog = Titanium.UI.createAlertDialog({
                 title: "Alert",
-                message: this.responseText,
+                message: "Registro Terminado",
                 buttonNames: [ "OK" ]
             });
             alertDialog.show();
             var correo = {
-                email: sesion.email
+                email: sesion.email,
+                password: sesion.password,
+                nombre: sesion.nombre,
+                apellidos: sesion.apellido,
+                academica: $.tableViewAcademica.data[0].rows[0].children[0].value,
+                cultural: $.tableViewCultural.data[0].rows[0].children[0].value,
+                entretenimiento: $.tableViewEntretenimiento.data[0].rows[0].children[0].value
             };
-            alert(correo);
             Alloy.createController("Evento", correo).getView().open();
         };
     }
@@ -482,7 +487,7 @@ function Controller() {
                 if ("Insert failed" == this.responseText) alert(this.responseText); else {
                     var alertDialog = Titanium.UI.createAlertDialog({
                         title: "Alert",
-                        message: this.responseText,
+                        message: "Registro Terminado",
                         buttonNames: [ "OK" ]
                     });
                     alertDialog.show();
@@ -490,9 +495,11 @@ function Controller() {
                         email: sesion.email,
                         password: sesion.password,
                         nombre: sesion.nombre,
-                        apellidos: sesion.apellido
+                        apellidos: sesion.apellido,
+                        academica: $.tableViewAcademica.data[0].rows[0].children[0].value,
+                        cultural: $.tableViewCultural.data[0].rows[0].children[0].value,
+                        entretenimiento: $.tableViewEntretenimiento.data[0].rows[0].children[0].value
                     };
-                    alert(correo);
                     Alloy.createController("Evento", correo).getView().open();
                 }
             };
